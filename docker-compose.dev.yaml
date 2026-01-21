@@ -6,6 +6,8 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile.dev
+    depends_on:
+      - backend
     ports:
       - "5173:5173"
     volumes:
@@ -21,9 +23,60 @@ services:
       retries: 5
       start_period: 5s
 
+  backend:
+    container_name: backend-dev
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - gradle_cache:/root/.gradle
+    networks:
+      - client-server-network
+      - server-db-network
+    environment:
+      - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
+      - SPRING_PROFILES_ACTIVE=dev
+      - JAVA_OPTS=""
+      - SERVER_PORT=${SERVER_PORT}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  postgres:
+    image: postgres:18.1-alpine3.22
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - server-db-network
+
 networks:
   client-server-network:
     driver: bridge
+  server-db-network:
+    driver: bridge
 
 volumes:
+  pgdata:
+  gradle_cache:
   node_modules_volume:
