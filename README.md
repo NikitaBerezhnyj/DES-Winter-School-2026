@@ -33,26 +33,37 @@ This repository includes both [english :uk:](#des-winter-school-2026-uk) and [uk
 
 ### Getting Started
 
-To get started with DES Winter School 2026, run it using Docker:
+To get started with DES Winter School 2026, follow this steps:
+
+1. Clone the repo
+
+```
+git clone https://github.com/NikitaBerezhnyj/DES-Winter-School-2026.git
+cd DES-Winter-School-2026
+```
+
+2. Create an .env file following the example in .env.example
+
+3. Run it using Docker:
 
 - For development environment:
 
   ```bash
-  docker-compose -f docker-compose.dev.yaml up --build
+  docker compose -f docker-compose.dev.yaml up --build
   ```
 
-  - Frontend runs on: http://localhost:5173
-  - Backend runs on: backend-url-or-port
+  - Frontend runs on: [http://localhost:5173](http://localhost:5173)
+  - Backend runs on: [http://localhost:8080](http://localhost:8080)
   - Changes in the source code are reflected immediately (live reload enabled)
 
 - For production environment:
 
   ```bash
-  docker-compose -f docker-compose.prod.yaml up --build
+  docker compose -f docker-compose.prod.yaml up --build
   ```
 
-  - Frontend runs on: http://localhost:80
-  - Backend runs on: backend-url-or-port
+  - Frontend runs on: [http://localhost:80](http://localhost:80)
+  - Backend runs on: [http://localhost:8080](http://localhost:8080)
   - Serves static files from the optimized build (/dist)
 
 ### Commit Conventions
@@ -147,7 +158,18 @@ Once the project is running, you can:
 
 ### Початок роботи
 
-Щоб почати працювати з DES Winter School 2026, запустіть проект за допомогою Docker:
+Щоб почати працювати з DES Winter School 2026, слідуйте наступним крокам:
+
+1. Клонуйте репозиторій:
+
+```
+git clone https://github.com/NikitaBerezhnyj/DES-Winter-School-2026.git
+cd DES-Winter-School-2026
+```
+
+2. Створіть .env файл за прикладом .env.example
+
+3. Запустіть проєкт за допомогою Docker:
 
 - Для середовища розробки:
 
@@ -156,9 +178,7 @@ Once the project is running, you can:
   ```
 
   - Frontend запускається на: [http://localhost:5173](http://localhost:5173)
-
   - Backend запускається на: [http://localhost:8080](http://localhost:8080)
-
   - Зміни в коді відображаються одразу (live reload увімкнено)
 
 - Для продакшн середовища:
@@ -168,7 +188,7 @@ Once the project is running, you can:
   ```
 
   - Frontend запускається на: [http://localhost:80](http://localhost:80)
-  - Backend запускається на: backend-url-or-port
+  - Backend запускається на: [http://localhost:8080](http://localhost:8080)
   - Віддає статичні файли з оптимізованого збірки (/dist)
 
 ### Правила комітів
@@ -219,15 +239,15 @@ docs: update README with Docker instructions
 
 ### Використання
 
-Після запуску проекту ви можете:
+Після запуску проєкту ви можете:
 
 1. ...
 
 ### Ліцензія та правила спільноти
 
-- [License](LICENSE) — ліцензія проекту.
+- [License](LICENSE) — ліцензія проєкту.
 - [Code of Conduct](CODE_OF_CONDUCT.md) — очікувана поведінка для контриб’юторів.
-- [Contributing Guide](CONTRIBUTING.md) — як допомогти проекту.
+- [Contributing Guide](CONTRIBUTING.md) — як допомогти проєкту.
 - [Security Policy](SECURITY.md) — повідомлення про проблеми безпеки.
 
 ```
