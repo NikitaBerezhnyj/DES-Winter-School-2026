@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MetricmindApplication {
+public class MetricMindApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MetricmindApplication.class, args);
+		SpringApplication.run(MetricMindApplication.class, args);
 	}
 
 }
