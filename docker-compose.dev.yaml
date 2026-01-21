@@ -14,7 +14,7 @@ services:
       - ./client:/app
       - node_modules_volume:/app/node_modules
     networks:
-      - client-server-network
+      - client-network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5173"]
@@ -36,8 +36,8 @@ services:
       - ./server:/app
       - gradle_cache:/root/.gradle
     networks:
-      - client-server-network
-      - server-db-network
+      - backend-network
+      - db-network
     environment:
       - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
       - SPRING_PROFILES_ACTIVE=dev
@@ -58,7 +58,7 @@ services:
 
   postgres:
     image: postgres:18.1-alpine3.22
-    container_name: postgres
+    container_name: postgres-dev
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -68,12 +68,14 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - server-db-network
+      - db-network
 
 networks:
-  client-server-network:
+  client-network:
     driver: bridge
-  server-db-network:
+  backend-network:
+    driver: bridge
+  db-network:
     driver: bridge
 
 volumes:
