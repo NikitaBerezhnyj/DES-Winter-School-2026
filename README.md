@@ -152,19 +152,19 @@ Once the project is running, you can:
 - Для середовища розробки:
 
   ```bash
-  docker-compose -f docker-compose.dev.yaml up --build
+  docker compose -f docker-compose.dev.yaml up --build
   ```
 
   - Frontend запускається на: [http://localhost:5173](http://localhost:5173)
 
-  - Backend запускається на: backend-url-or-port
+  - Backend запускається на: [http://localhost:8080](http://localhost:8080)
 
   - Зміни в коді відображаються одразу (live reload увімкнено)
 
 - Для продакшн середовища:
 
   ```bash
-  docker-compose -f docker-compose.prod.yaml up --build
+  docker compose -f docker-compose.prod.yaml up --build
   ```
 
   - Frontend запускається на: [http://localhost:80](http://localhost:80)
