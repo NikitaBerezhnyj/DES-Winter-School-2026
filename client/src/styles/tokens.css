@@ -1,0 +1,37 @@
+:root {
+  /* Colors */
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Typography */
+  --font-sm: 13px;
+  --font-base: 15px;
+  --font-lg: 18px;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card: #020617;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #1e293b;
+}
