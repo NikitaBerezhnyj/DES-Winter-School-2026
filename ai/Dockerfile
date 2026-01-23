@@ -1,5 +1,3 @@
 FROM ollama/ollama
 
-EXPOSE 11434
-
-CMD ["ollama", "serve"]
+COPY ./pull-llama3.sh /pull-llama3.sh
