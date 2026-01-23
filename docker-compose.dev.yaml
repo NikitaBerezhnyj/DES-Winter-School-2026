@@ -10,6 +10,8 @@ services:
       - backend
     ports:
       - "5173:5173"
+    environment:
+      - VITE_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     volumes:
       - ./client:/app
       - node_modules_volume:/app/node_modules
@@ -52,6 +54,7 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - AI_HOST=${AI_HOST}
       - AI_PORT=${AI_PORT}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
