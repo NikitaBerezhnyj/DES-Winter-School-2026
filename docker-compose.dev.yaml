@@ -30,6 +30,7 @@ services:
       dockerfile: Dockerfile.dev
     depends_on:
       - postgres
+      - ai
     ports:
       - "8080:8080"
     volumes:
@@ -38,6 +39,7 @@ services:
     networks:
       - backend-network
       - db-network
+      - ai-network
     environment:
       - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
       - SPRING_PROFILES_ACTIVE=dev
@@ -48,6 +50,8 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - AI_HOST=${AI_HOST}
+      - AI_PORT=${AI_PORT}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
@@ -70,6 +74,25 @@ services:
     networks:
       - db-network
 
+  ai:
+    container_name: ai-dev
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai-network
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
 networks:
   client-network:
     driver: bridge
@@ -77,8 +100,11 @@ networks:
     driver: bridge
   db-network:
     driver: bridge
+  ai-network:
+    driver: bridge
 
 volumes:
   pgdata:
+  ollama_data:
   gradle_cache:
   node_modules_volume:
