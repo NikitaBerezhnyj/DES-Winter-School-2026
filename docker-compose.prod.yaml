@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - "80:80"
+    environment:
+      - VITE_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     networks:
       - client-network
       - backend-network
@@ -26,6 +28,7 @@ services:
       dockerfile: Dockerfile.prod
     depends_on:
       - postgres
+      - ai
     ports:
       - "8080:8080"
     environment:
@@ -36,9 +39,13 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
+      - AI_HOST=${AI_HOST}
+      - AI_PORT=${AI_PORT}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     networks:
       - backend-network
       - db-network
+      - ai-network
     restart: unless-stopped
     healthcheck:
       test:
@@ -61,6 +68,25 @@ services:
       - db-network
     restart: unless-stopped
 
+  ai:
+    container_name: ai-dev
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai-network
+      - backend-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
 networks:
   client-network:
     driver: bridge
@@ -68,6 +94,9 @@ networks:
     driver: bridge
   db-network:
     driver: bridge
+  ai-network:
+    driver: bridge
 
 volumes:
   pgdata_prod:
+  ollama_data:
