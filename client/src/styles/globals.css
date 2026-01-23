@@ -1,0 +1,221 @@
+/* ===============================
+   DESIGN TOKENS
+   =============================== */
+
+:root {
+  /* Colors — light */
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+
+  /* Accent */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Typography */
+  --font-base: 15px;
+  --font-sm: 13px;
+  --font-lg: 18px;
+}
+
+/* ===============================
+     DARK THEME
+     =============================== */
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card: #020617;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #1e293b;
+}
+
+/* ===============================
+     RESET & BASE
+     =============================== */
+
+* {
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: var(--font-base);
+  line-height: 1.5;
+}
+
+/* ===============================
+     TYPOGRAPHY
+     =============================== */
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 var(--space-md) 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 var(--space-md) 0;
+  color: var(--text-muted);
+}
+
+/* ===============================
+     BUTTONS
+     =============================== */
+
+button {
+  font-family: inherit;
+  font-size: var(--font-sm);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+button:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 
+     UTILITIES
+     */
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===============================
+   LOGIN PAGE 
+   =============================== */
+
+.login-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* absolute centering that ignores body transforms */
+.login-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  max-width: 380px;
+  padding: var(--space-xl);
+
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* floating theme toggle */
+.login-theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+/* adaptive text */
+.login-card h1 {
+  font-size: clamp(22px, 5vw, 32px);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.login-card p {
+  font-size: clamp(13px, 3.5vw, 15px);
+}
+
+/* ===============================
+   LOGIN THEME TOGGLE
+   =============================== */
+
+.login-theme {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+}
+
+/* ===============================
+   RESPONSIVE TEXT FIX
+   =============================== */
+
+.login-card {
+  max-width: 360px;
+  width: 100%;
+}
+
+.login-card h1 {
+  font-size: clamp(22px, 5vw, 32px);
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.login-card p {
+  font-size: clamp(13px, 3.5vw, 15px);
+  max-width: 100%;
+}
