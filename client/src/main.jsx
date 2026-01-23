@@ -9,8 +9,7 @@ import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/buttons.css";
 import "./styles/layout.css";
-
-const GOOGLE_CLIENT_ID = "56779242144-ouljdijfbjs1gqfhiacjeah7fhjse7e6.apps.googleusercontent.com";
+import { GOOGLE_CLIENT_ID } from "./constants/constants";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
