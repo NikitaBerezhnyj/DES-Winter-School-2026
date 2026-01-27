@@ -1,4 +1,25 @@
-@backend_url = http://localhost:8080 
+@backend_url = http://localhost:8080
 
 ### GET Healthcheck
 GET {{backend_url}}/actuator/health
+
+### POST Login
+POST {{backend_url}}/api/auth/login
+Content-Type: application/json
+
+{
+    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1NDRkMGZmMDU5MGYwMjUzMDE2NDNmMzI3NWJmNjg3NzY3NjU4MjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI4MzI0NzA3MjA1MzMwNzAyOTMiLCJlbWFpbCI6IndpbnRlcmZka2dqMzU1MkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzY5NTE1OTA0LCJuYW1lIjoiV2ludGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tSamttMnNJUHpndTBTT0dYVGNsSWFsemR2eEZQS0pVVUhWbVFlWURqd3F5cTlUdz1zOTYtYyIsImdpdmVuX25hbWUiOiJXaW50ZXIiLCJpYXQiOjE3Njk1MTYyMDQsImV4cCI6MTc2OTUxOTgwNCwianRpIjoiYzA3ZTczN2VhNjU3MjQxNmI1Mjg5MjAzNzc3MTEwODYxMGQ0NmViOCJ9.VtDBWAzgZcamj2YAfagW3n6DLJvPCOGM6bJecrynYMay5c1r-3Z3lFiQZRJvvyCMoS8Ajh3bGi0cE8BtP16F1_M8K72N_013_SMGgJG3OHmJ7FF6Q90xD7KboyyV03vvadfSs9p5Wb5b_KURAXGQkfkZcUlhKoep8KMJvLnx_2Yol8okh5YmwGttdiKoxu2hId7wN0JpetxPIVpWiXXRUAoG30QKFLTegpfjswkpvo7sjJDgNAR32a_F-6grLUmEOhoXh7PdGskUsD0hEasGA2hAY4voyI_0b0ZQ7jDMHj9Tnr310XPrPZ7GrwWTSaMXL2RkEEBSZXoK1cBvvjeNMA"
+}
+
+### GET Current User
+GET {{backend_url}}/api/auth/me
+Cookie: SESSION_TOKEN=<sessionToken>
+
+
+### POST logout
+POST {{backend_url}}/api/auth/logout
+Cookie: SESSION_TOKEN=<sessionToken>
+
+### GET Check Auth
+GET {{backend_url}}/api/auth/check
+Cookie: SESSION_TOKEN=<sessionToken>
