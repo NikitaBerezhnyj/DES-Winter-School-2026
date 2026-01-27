@@ -1,38 +1,64 @@
+/* Сторінка логіну */
 .login-page {
   min-height: 100vh;
-  background: var(--bg);
-}
-
-.login-card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 100%;
-  max-width: 380px;
-  padding: var(--space-xl);
-
-  background: var(--card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  text-align: center;
-
+  background: var(--bg-main);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
 }
 
-.login-theme {
+/* Кнопка теми */
+.login-theme-toggle {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
 }
 
-.login-card h1 {
-  font-size: clamp(22px, 5vw, 32px);
+/* Картка логіну */
+.login-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 20px;
+  padding: 40px;
+  width: 360px;
+  text-align: center;
+  color: var(--text-main);
 }
 
-.login-card p {
-  font-size: clamp(13px, 3.5vw, 15px);
+/* Тексти */
+.login-title {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.login-subtitle {
+  margin-bottom: 28px;
+  font-size: 15px;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+/* Кнопка */
+.login-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #4f8cff, #6fa8ff);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.2s ease;
+}
+
+.login-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: default;
 }

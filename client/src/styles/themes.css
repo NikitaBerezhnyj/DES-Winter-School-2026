@@ -1,6 +1,29 @@
-[data-theme="dark"] {
-  --bg: #0f172a;
-  --text: #e5e7eb;
-  --card: #1e293b;
-  --border: #334155;
+/* ===== DARK THEME ===== */
+:root[data-theme="dark"] {
+  --bg-main: radial-gradient(circle at top, #0a1630, #050b1c 70%);
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.1);
+
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+
+  --accent: #4f8cff;
+  --accent-hover: #6fa8ff;
+
+  --button-text: #ffffff;
+}
+
+/* ===== LIGHT THEME ===== */
+:root[data-theme="light"] {
+  --bg-main: linear-gradient(180deg, #f5f7fb, #e6ebf4);
+  --bg-card: #ffffff;
+  --border-card: #e2e6ef;
+
+  --text-main: #0f172a;
+  --text-muted: #5b647a;
+
+  --accent: #2563eb;
+  --accent-hover: #1e40af;
+
+  --button-text: #ffffff;
 }

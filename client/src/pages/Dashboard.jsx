@@ -1,54 +1,48 @@
 import ThemeToggle from "../components/ThemeToggle";
-
-import "../styles/layout.css";
 import "../styles/dashboard.css";
 
 export default function Dashboard({ user }) {
-  if (!user) return null;
-
   return (
-    <div className="app page">
+    <div className="dashboard-page">
       {/* HEADER */}
-      <header className="app-header">
-        <h1 className="logo">UASmartAnalytics</h1>
-        <ThemeToggle />
+      <header className="dashboard-header">
+        <div className="dashboard-header-inner">
+          <strong>MetricMind</strong>
+          <ThemeToggle />
+        </div>
       </header>
 
       {/* CONTENT */}
-      <main className="app-content">
-        <div className="container">
-          <p className="welcome">
-            Ласкаво просимо, <strong>{user.email}</strong>
+      <main className="dashboard-content">
+        <p className="welcome">
+          Ласкаво просимо, <b>{user.email}</b>
+        </p>
+
+        <section className="metrics-grid">
+          <Metric icon="👥" label="Користувачі" value="12 340" />
+          <Metric icon="📈" label="Сеанси" value="28 912" />
+          <Metric icon="💰" label="Дохід" value="$4 560" />
+          <Metric icon="⚡" label="Конверсія" value="3.4%" />
+        </section>
+
+        <section className="ai-card">
+          <h3>🤖 AI-аналітика</h3>
+          <p>
+            За останні 30 днів трафік зріс на <b>18%</b>. Найкраще працюють мобільні користувачі —
+            рекомендуємо оптимізувати сторінки під них.
           </p>
-
-          {/* METRICS */}
-          <section className="metrics">
-            <Metric title="Користувачі" value="12 340" />
-            <Metric title="Конверсія" value="3,4%" />
-            <Metric title="Дохід" value="$4 560" />
-          </section>
-
-          {/* AI SECTION */}
-          <section className="ai-section">
-            <h3>Аналітика штучного інтелекту</h3>
-            <p>
-              Трафік зріс на 18% за останні 30 днів. Рекомендується зосередитись на мобільній
-              оптимізації для підвищення конверсії.
-            </p>
-          </section>
-        </div>
+        </section>
       </main>
     </div>
   );
 }
 
-/* ===== METRIC CARD ===== */
-
-function Metric({ title, value }) {
+function Metric({ icon, label, value }) {
   return (
     <div className="metric-card">
-      <span>{title}</span>
-      <strong>{value}</strong>
+      <span className="metric-label">{label}</span>
+      <strong className="metric-value">{value}</strong>
+      <span className="metric-icon">{icon}</span>
     </div>
   );
 }
