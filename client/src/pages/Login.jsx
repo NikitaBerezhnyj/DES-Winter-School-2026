@@ -1,49 +1,31 @@
 import { useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
 import ThemeToggle from "../components/ThemeToggle";
-import { jwtDecode } from "jwt-decode";
 import "../styles/login.css";
 
 export default function Login({ onLogin }) {
   const [loading, setLoading] = useState(false);
 
-  const handleSuccess = credentialResponse => {
+  const handleLogin = () => {
     setLoading(true);
-    try {
-      const userData = jwtDecode(credentialResponse.credential);
-      console.log("Credential Response:", credentialResponse);
-      console.log("Google User Data:", userData);
 
-      onLogin({
-        email: userData.email,
-        name: userData.name,
-        picture: userData.picture
-      });
-    } catch (err) {
-      console.error("Failed to decode token:", err);
-    } finally {
+    // 🔧 Тимчасовий mock-login (до backend OAuth)
+    setTimeout(() => {
+      onLogin({ email: "user@metricmind.app" });
       setLoading(false);
-    }
-  };
-
-  const handleError = () => {
-    console.error("Login Failed");
-    setLoading(false);
+    }, 1000);
   };
 
   return (
     <div className="login-page">
-      <div className="login-theme">
-        <ThemeToggle />
-      </div>
+      <ThemeToggle />
 
       <div className="login-card">
-        <h1>UASmartAnalytics</h1>
-        <p>Увійдіть, щоб переглянути аналітику вашого сайту</p>
+        <h1>MetricMind</h1>
+        <p>Увійдіть, щоб переглянути аналітику</p>
 
-        <GoogleLogin onSuccess={handleSuccess} onError={handleError} useOneTap />
-
-        {loading && <p>Завантаження...</p>}
+        <button className="login-button" onClick={handleLogin} disabled={loading}>
+          {loading ? "Завантаження..." : "Увійти через Google"}
+        </button>
       </div>
     </div>
   );
