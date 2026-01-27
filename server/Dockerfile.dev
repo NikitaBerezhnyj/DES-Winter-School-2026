@@ -13,4 +13,4 @@ RUN ./gradlew build -x test --warning-mode all || true
 
 COPY . .
 
-CMD ["./gradlew", "bootRun"]
+CMD ["./gradlew", "bootRun", "--continuous"]

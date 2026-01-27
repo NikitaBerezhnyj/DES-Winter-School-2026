@@ -20,6 +20,17 @@ spring:
   devtools:
     restart:
       enabled: true
+      additional-paths: /app/src/main
+
+google:
+  client-id: ${GOOGLE_CLIENT_ID}
+  client-secret: ${GOOGLE_CLIENT_SECRET}
+
+session:
+  duration-hours: ${SESSION_DURATION_HOURS:720}
+  cookie-name: ${SESSION_COOKIE_NAME:SESSION_TOKEN}
+  cookie-secure: ${SESSION_COOKIE_SECURE:false}
+  cookie-same-site: ${SESSION_COOKIE_SAME_SITE:Lax}
 
 logging:
   level:
