@@ -1,4 +1,4 @@
-import ThemeToggle from "../components/ThemeToggle";
+import { BarChart3, Users, TrendingUp, Activity } from "lucide-react";
 import "../styles/dashboard.css";
 
 export default function Dashboard({ user }) {
@@ -6,43 +6,50 @@ export default function Dashboard({ user }) {
     <div className="dashboard-page">
       {/* HEADER */}
       <header className="dashboard-header">
-        <div className="dashboard-header-inner">
-          <strong>MetricMind</strong>
-          <ThemeToggle />
-        </div>
+        <h1 className="dashboard-title">Dashboard</h1>
+        <span className="dashboard-user">{user?.email}</span>
       </header>
 
-      {/* CONTENT */}
-      <main className="dashboard-content">
-        <p className="welcome">
-          Ласкаво просимо, <b>{user.email}</b>
-        </p>
+      {/* STATS */}
+      <section className="dashboard-stats">
+        <div className="hover-card stat-card">
+          <BarChart3 className="stat-icon" />
+          <div className="stat-content">
+            <span className="stat-label">Сеанси</span>
+            <strong className="stat-value">12 430</strong>
+          </div>
+        </div>
 
-        <section className="metrics-grid">
-          <Metric icon="👥" label="Користувачі" value="12 340" />
-          <Metric icon="📈" label="Сеанси" value="28 912" />
-          <Metric icon="💰" label="Дохід" value="$4 560" />
-          <Metric icon="⚡" label="Конверсія" value="3.4%" />
-        </section>
+        <div className="hover-card stat-card">
+          <Users className="stat-icon" />
+          <div className="stat-content">
+            <span className="stat-label">Користувачі</span>
+            <strong className="stat-value">3 280</strong>
+          </div>
+        </div>
 
-        <section className="ai-card">
-          <h3>🤖 AI-аналітика</h3>
-          <p>
-            За останні 30 днів трафік зріс на <b>18%</b>. Найкраще працюють мобільні користувачі —
-            рекомендуємо оптимізувати сторінки під них.
-          </p>
-        </section>
-      </main>
-    </div>
-  );
-}
+        <div className="hover-card stat-card">
+          <TrendingUp className="stat-icon" />
+          <div className="stat-content">
+            <span className="stat-label">Конверсія</span>
+            <strong className="stat-value">4.8%</strong>
+          </div>
+        </div>
 
-function Metric({ icon, label, value }) {
-  return (
-    <div className="metric-card">
-      <span className="metric-label">{label}</span>
-      <strong className="metric-value">{value}</strong>
-      <span className="metric-icon">{icon}</span>
+        <div className="hover-card stat-card">
+          <Activity className="stat-icon" />
+          <div className="stat-content">
+            <span className="stat-label">Активність</span>
+            <strong className="stat-value">Висока</strong>
+          </div>
+        </div>
+      </section>
+
+      {/* PLACEHOLDER */}
+      <section className="dashboard-placeholder hover-card">
+        <h2>Аналітика скоро</h2>
+        <p>Тут зʼявляться AI-звіти, графіки та рекомендації після інтеграції з backend</p>
+      </section>
     </div>
   );
 }

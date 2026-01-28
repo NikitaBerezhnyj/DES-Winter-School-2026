@@ -2,108 +2,86 @@
   min-height: 100vh;
   background: var(--bg-main);
   color: var(--text-main);
+  padding: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* HEADER */
 .dashboard-header {
-  position: sticky;
-  top: 0;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border-card);
-  padding: 16px 24px;
-  z-index: 10;
-}
-
-.dashboard-header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 40px;
 }
 
-/* MAIN */
-.dashboard-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
-
-/* METRICS */
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  margin-bottom: 48px;
-}
-
-.metric-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 20px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.metric-label {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.metric-value {
+.dashboard-title {
   font-size: 32px;
   font-weight: 600;
 }
 
-.metric-icon {
-  font-size: 28px;
-  align-self: flex-end;
-}
-
-/* AI REPORT */
-.ai-card {
-  background: linear-gradient(135deg, rgba(79, 140, 255, 0.15), rgba(79, 140, 255, 0.05));
-  border: 1px solid var(--border-card);
-  border-radius: 24px;
-  padding: 32px;
-}
-
-.ai-card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-/* SMOOTH */
-.metric-card,
-.ai-card {
-  will-change: transform;
-}
-
-/* WELCOME TEXT */
-.welcome {
-  margin-bottom: 32px;
-  font-size: 15px;
+.dashboard-user {
+  font-size: 14px;
   color: var(--text-muted);
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-  .metric-value {
-    font-size: 26px;
-  }
+/* STATS GRID */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
 
-  .dashboard-header-inner {
-    flex-direction: column;
-    gap: 12px;
-  }
+/* STAT CARD */
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 🔥 ОСНОВНЕ: більше повітря */
+
+  padding: 24px;
+}
+
+/* ICON */
+.stat-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* TEXT */
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* 🔥 відступ між label і value */
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* PLACEHOLDER */
+.dashboard-placeholder {
+  padding: 48px 32px;
+  text-align: center;
+}
+
+.dashboard-placeholder h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.dashboard-placeholder p {
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
