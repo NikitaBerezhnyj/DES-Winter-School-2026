@@ -28,9 +28,9 @@ google:
 
 ai:
   provider: ollama
-  base-url: http://${AI_HOST}:${AI_PORT}
-  model: ${AI_MODEL:llama3}
-  timeout-seconds: 30
+  base-url: http://${AI_HOST:localhost}:${AI_PORT:11434}
+  model: ${AI_MODEL:llama3.2:1b}
+  timeout-seconds: 60
 
 session:
   duration-hours: ${SESSION_DURATION_HOURS:720}

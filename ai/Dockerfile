@@ -1,8 +1,7 @@
 FROM ollama/ollama
 
-COPY ./pull-llama3.sh /pull-llama3.sh
+COPY ./entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && \
+    chmod +x /entrypoint.sh
 
-RUN sed -i 's/\r$//' /pull-llama3.sh && \
-    chmod +x /pull-llama3.sh
-
-ENTRYPOINT ["/pull-llama3.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
