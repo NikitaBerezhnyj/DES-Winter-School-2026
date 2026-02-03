@@ -92,10 +92,11 @@ services:
       - backend-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "ollama", "list"]
-      interval: 15s
-      timeout: 5s
+      test: ["CMD", "/bin/ollama", "list"]
+      interval: 30s
+      timeout: 10s
       retries: 5
+      start_period: 120s
 
 networks:
   client-network:
