@@ -1,10 +1,15 @@
-./bin/ollama serve &
+#!/bin/bash
+set -e
 
+echo "Starting Ollama server..."
+/bin/ollama serve &
 pid=$!
 
-sleep 5
+echo "Waiting for Ollama server to start..."
+sleep 10
 
-echo "Pulling llama3 model"
+echo "Pulling llama3 model..."
 ollama pull llama3
 
+echo "Model pulled successfully. Keeping server running..."
 wait $pid

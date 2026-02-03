@@ -1,16 +1,21 @@
-FROM eclipse-temurin:17-jdk-jammy
+FROM ollama/ollama
 
-WORKDIR /app
+# Створюємо скрипт безпосередньо у Dockerfile
+RUN echo '#!/bin/bash\n\
+set -e\n\
+echo "Starting Ollama server..."\n\
+/bin/ollama serve &\n\
+pid=$!\n\
+echo "Waiting for Ollama server to start..."\n\
+sleep 10\n\
+if ! ollama list | grep -q "llama3"; then\n\
+    echo "Pulling llama3 model..."\n\
+    ollama pull llama3\n\
+    echo "Model pulled successfully"\n\
+else\n\
+    echo "Model llama3 already exists"\n\
+fi\n\
+wait $pid' > /entrypoint.sh && \
+    chmod +x /entrypoint.sh
 
-COPY gradlew .
-COPY gradle gradle
-
-COPY build.gradle .
-COPY settings.gradle .
-
-RUN chmod +x gradlew
-RUN ./gradlew build -x test --warning-mode all || true
-
-COPY . .
-
-CMD ["./gradlew", "bootRun", "--continuous"]
+ENTRYPOINT ["/entrypoint.sh"]

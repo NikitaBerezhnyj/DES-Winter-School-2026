@@ -26,6 +26,12 @@ google:
   client-id: ${GOOGLE_CLIENT_ID}
   client-secret: ${GOOGLE_CLIENT_SECRET}
 
+ai:
+  provider: ollama
+  base-url: http://${AI_HOST}:${AI_PORT}
+  model: ${AI_MODEL:llama3}
+  timeout-seconds: 30
+
 session:
   duration-hours: ${SESSION_DURATION_HOURS:720}
   cookie-name: ${SESSION_COOKIE_NAME:SESSION_TOKEN}
