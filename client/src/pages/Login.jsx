@@ -6,13 +6,18 @@ import "../styles/login.css";
 
 export default function Login({ onLogin }) {
   const [loading, setLoading] = useState(false);
+  const [googleError, setGoogleError] = useState(false);
 
-  const handleSuccess = credentialResponse => {
+  const handleGoogleSuccess = credentialResponse => {
+    if (!credentialResponse?.credential) {
+      setGoogleError(true);
+      return;
+    }
+
     setLoading(true);
+
     try {
       const userData = jwtDecode(credentialResponse.credential);
-      console.log("Credential Response:", credentialResponse);
-      console.log("Google User Data:", userData);
 
       onLogin({
         email: userData.email,
@@ -20,15 +25,30 @@ export default function Login({ onLogin }) {
         picture: userData.picture
       });
     } catch (err) {
-      console.error("Failed to decode token:", err);
+      console.error("Failed to decode Google token:", err);
+      setGoogleError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleError = () => {
-    console.error("Login Failed");
-    setLoading(false);
+  const handleGoogleError = () => {
+    console.error("Google Login Failed");
+    setGoogleError(true);
+  };
+
+  const handleMockLogin = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      onLogin({
+        email: "user@metricmind.app",
+        name: "Test User",
+        picture: null
+      });
+
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -38,12 +58,18 @@ export default function Login({ onLogin }) {
       </div>
 
       <div className="login-card">
-        <h1>UASmartAnalytics</h1>
+        <h1>MetricMind</h1>
         <p>Увійдіть, щоб переглянути аналітику вашого сайту</p>
 
-        <GoogleLogin onSuccess={handleSuccess} onError={handleError} useOneTap />
+        <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} useOneTap />
 
-        {loading && <p>Завантаження...</p>}
+        {loading && <p className="login-loading">Завантаження...</p>}
+
+        {googleError && (
+          <button className="login-button" onClick={handleMockLogin} disabled={loading}>
+            {loading ? "Завантаження..." : "Увійти (тимчасовий режим)"}
+          </button>
+        )}
       </div>
     </div>
   );
