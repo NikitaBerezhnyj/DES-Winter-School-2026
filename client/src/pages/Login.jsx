@@ -17,6 +17,7 @@ export default function Login({ onLogin }) {
     setLoading(true);
 
     try {
+      console.log("Google Credential Response:", credentialResponse);
       const userData = jwtDecode(credentialResponse.credential);
 
       onLogin({

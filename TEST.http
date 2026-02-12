@@ -1,4 +1,12 @@
 @backend_url = http://localhost:8080
+@ai_url = http://localhost:11434
+
+@idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImMyN2JhNDBiMDk1MjlhZDRmMTY4MjJjZTgzMTY3YzFiYzM5MTAxMjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI4MzI0NzA3MjA1MzMwNzAyOTMiLCJlbWFpbCI6IndpbnRlcmZka2dqMzU1MkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzcwOTExMjg0LCJuYW1lIjoiV2ludGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tSamttMnNJUHpndTBTT0dYVGNsSWFsemR2eEZQS0pVVUhWbVFlWURqd3F5cTlUdz1zOTYtYyIsImdpdmVuX25hbWUiOiJXaW50ZXIiLCJpYXQiOjE3NzA5MTE1ODQsImV4cCI6MTc3MDkxNTE4NCwianRpIjoiNjA5NTkwMmQ0ZDAyYmVkMzNiMzlmZTgwMTY3ZDY5ZWU5YjFlZGM0ZiJ9.YxCIEW3ckfbGZg9RjINEtnui4UE5chX7Y4OJzK8de1u3Ls_08IiyYAZXe_YJevvJVJW1qYIGMcpSZQmifWh3WRovKF8v9TYygmqucGYpSmGg0M3ldu9mgERgidFNq0UGAtoq4Ky8SGuZ9i3lnSANfqPjbf828kHDXLPEKO2indWmElR8Ed3XAWClSIaCcgkJRT7erhAXDmZcsYeKIu6I71JbWlHyfP34Koj-6HoT10GtaTnwo1sZVOTMGLxoUQB96f8-DFSp4-KzgHr6Ei5GtXgUTIp1mpB6ZtGWFkSt0sXst-DCgdlztEkZ-Qc_rfsay9bB51S0TSbwA-w2JDQijg"
+@sessionToken = "FVQ0AdmoSbfgHGCn6SDNgN5JJYQ2UlPnfXRKjMzh1xc"
+
+### ================================
+### BACKEND API
+### ================================
 
 ### GET Healthcheck
 GET {{backend_url}}/actuator/health
@@ -8,18 +16,59 @@ POST {{backend_url}}/api/auth/login
 Content-Type: application/json
 
 {
-    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk1NDRkMGZmMDU5MGYwMjUzMDE2NDNmMzI3NWJmNjg3NzY3NjU4MjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI4MzI0NzA3MjA1MzMwNzAyOTMiLCJlbWFpbCI6IndpbnRlcmZka2dqMzU1MkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzY5NTE1OTA0LCJuYW1lIjoiV2ludGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tSamttMnNJUHpndTBTT0dYVGNsSWFsemR2eEZQS0pVVUhWbVFlWURqd3F5cTlUdz1zOTYtYyIsImdpdmVuX25hbWUiOiJXaW50ZXIiLCJpYXQiOjE3Njk1MTYyMDQsImV4cCI6MTc2OTUxOTgwNCwianRpIjoiYzA3ZTczN2VhNjU3MjQxNmI1Mjg5MjAzNzc3MTEwODYxMGQ0NmViOCJ9.VtDBWAzgZcamj2YAfagW3n6DLJvPCOGM6bJecrynYMay5c1r-3Z3lFiQZRJvvyCMoS8Ajh3bGi0cE8BtP16F1_M8K72N_013_SMGgJG3OHmJ7FF6Q90xD7KboyyV03vvadfSs9p5Wb5b_KURAXGQkfkZcUlhKoep8KMJvLnx_2Yol8okh5YmwGttdiKoxu2hId7wN0JpetxPIVpWiXXRUAoG30QKFLTegpfjswkpvo7sjJDgNAR32a_F-6grLUmEOhoXh7PdGskUsD0hEasGA2hAY4voyI_0b0ZQ7jDMHj9Tnr310XPrPZ7GrwWTSaMXL2RkEEBSZXoK1cBvvjeNMA"
+    "idToken": {{idToken}}
 }
 
 ### GET Current User
 GET {{backend_url}}/api/auth/me
-Cookie: SESSION_TOKEN=<sessionToken>
-
+Cookie: SESSION_TOKEN={{sessionToken}}
 
 ### POST logout
 POST {{backend_url}}/api/auth/logout
-Cookie: SESSION_TOKEN=<sessionToken>
+Cookie: SESSION_TOKEN={{sessionToken}}
 
 ### GET Check Auth
 GET {{backend_url}}/api/auth/check
-Cookie: SESSION_TOKEN=<sessionToken>
+Cookie: SESSION_TOKEN={{sessionToken}}
+
+### GET Dashboard report for 7 days
+GET {{backend_url}}/api/dashboard?period=7
+Cookie: SESSION_TOKEN={{sessionToken}}
+
+### GET Dashboard report for 30 days
+GET {{backend_url}}/api/dashboard?period=30
+Cookie: SESSION_TOKEN={{sessionToken}}
+
+### ================================
+### AI API
+### ================================
+
+### GET AI running
+GET {{ai_url}}/
+
+### GET List of AI
+GET {{ai_url}}/api/tags
+
+### POST 
+POST {{ai_url}}/api/chat
+Content-Type: application/json
+
+{
+  "model": "llama3.2:1b",
+  "messages": [
+    {
+        "role": "system", 
+        "content": "You are a professional Google Analytics consultant. Analyze metrics and provide actionable insights in JSON format with three fields: - 'summary': brief overview (2-3 sentences max);  - 'explanation': detailed analysis of key changes and trends; - 'recommendation': specific actionable advice for improvement"
+    },
+    {
+        "role": "user", 
+        "content": "Analyze the following GA4 metrics for the last 7 days:\n\nMetrics:\n- Users: 1245\n- Sessions: 1980 \n- Bounce Rate: 42.5%\n- Average Session Duration: 3m 45s\n- Conversions: 56\n\nProvide analysis in JSON format with fields: summary, explanation, recommendation."
+    }
+  ],
+  "format": "json",
+  "stream": false,
+  "options": {
+    "temperature": 0.3,
+    "num_predict": 500
+  }
+}
