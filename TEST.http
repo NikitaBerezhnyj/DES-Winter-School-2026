@@ -43,13 +43,13 @@ Cookie: SESSION_TOKEN={{sessionToken}}
 ### AI API
 ### ================================
 
-### GET AI running
+### GET AI Service Status
 GET {{ai_url}}/
 
-### GET List of AI
+### GET Available AI Models
 GET {{ai_url}}/api/tags
 
-### POST 
+### POST Generate AI Analysis
 POST {{ai_url}}/api/chat
 Content-Type: application/json
 
