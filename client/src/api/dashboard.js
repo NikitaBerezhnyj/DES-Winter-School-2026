@@ -1,9 +1,5 @@
-import { apiRequest } from "./client";
+import { apiRequest } from "../utils/ApiClient";
 
-export function fetchDashboard() {
-  return apiRequest("/dashboard");
-}
-
-export function fetchAiReport() {
-  return apiRequest("/dashboard/ai-report");
-}
+export const getDashboardReport = async period => {
+  return apiRequest(`/api/dashboard?period=${period}`);
+};

@@ -1,0 +1,144 @@
+.landing {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.hero {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.hero-content button {
+    font-size: var(--font-lg);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.hero-badge svg {
+    color: var(--accent);
+}
+
+.title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 0;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: var(--font-lg);
+    color: var(--text-muted);
+    margin-bottom: 0;
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+.features,
+.roadmap {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.roadmap-title,
+.features-title {
+    text-align: center;
+    font-size: 2.25rem;
+    margin-bottom: var(--space-xl);
+}
+
+.roadmap-grid,
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-xl);
+}
+
+.features {
+    background-color: var(--bg-card);
+}
+
+.feature-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+}
+
+.roadmap {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bg);
+}
+
+.features-grid div {
+    background: var(--bg);
+}
+
+.roadmap-quarter {
+    font-size: var(--font-lg);
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: var(--space-xs);
+}
+
+.footer {
+    width: 100%;
+    color: var(--text-muted);
+    padding: var(--space-xl) var(--space-lg);
+    border-top: 1px solid var(--border);
+    font-size: var(--font-sm);
+    background-color: var(--bg-card);
+}
+
+.footer-content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.footer-contacts {
+    text-align: right;
+}

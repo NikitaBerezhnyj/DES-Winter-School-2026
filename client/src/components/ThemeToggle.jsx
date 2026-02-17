@@ -1,25 +1,23 @@
-export default function ThemeToggle() {
-  const toggleTheme = () => {
-    const current = document.documentElement.getAttribute("data-theme") || "light";
-    const next = current === "light" ? "dark" : "light";
+import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
+import "../styles/components/ThemeToggle.css";
 
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+export default function ThemeToggle() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      style={{
-        padding: "6px 14px",
-        borderRadius: 8,
-        border: "1px solid var(--border)",
-        background: "var(--card)",
-        color: "var(--text)",
-        cursor: "pointer"
-      }}
-    >
-      🌗 Тема
+    <button className="theme-toggle-button" onClick={toggleTheme}>
+      <span className={`icon-wrapper ${theme}`}>{theme === "light" ? <Sun /> : <Moon />}</span>
     </button>
   );
 }

@@ -1,0 +1,31 @@
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.75);
+    border-bottom: 1px solid var(--border);
+    z-index: 20;
+}
+
+[data-theme="dark"] .header {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.header-inner {
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    font-weight: 600;
+    font-size: var(--font-lg);
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--space-md);
+}

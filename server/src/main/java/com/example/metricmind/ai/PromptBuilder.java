@@ -1,11 +1,13 @@
 package com.example.metricmind.ai;
 
-import com.example.metricmind.dto.ai.AiRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import com.example.metricmind.dto.ai.AiRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
@@ -13,13 +15,30 @@ public class PromptBuilder {
     
     private final ObjectMapper mapper;
     
-    private static final String SYSTEM_PROMPT = """
-        You are a professional Google Analytics consultant. 
-        Analyze metrics and provide actionable insights in JSON format with three fields:
-        - 'summary': brief overview (2-3 sentences max)
-        - 'explanation': detailed analysis of key changes and trends
-        - 'recommendation': specific actionable advice for improvement
+    private static final String RESPONSE_LANGUAGE = "Ukrainian";
+    private static final String SYSTEM_PROMPT_TEMPLATE = """
+        You are a Google Analytics consultant.
+
+        You MUST respond with ONLY a raw JSON object.
+        Do NOT wrap it in markdown.
+        Do NOT add explanations before or after.
+        Do NOT add code fences.
+        Return pure JSON only.
+
+        The JSON must contain exactly these three string fields:
+
+        {
+        "summary": "brief overview here",
+        "explanation": "detailed analysis here as plain text",
+        "recommendation": "actionable advice here as plain text"
+        }
+
+        All three values MUST be plain text strings.
+        Do NOT use nested objects.
+        Do NOT use arrays.
+        All responses must be in %s.
         """;
+    private static final String SYSTEM_PROMPT = String.format(SYSTEM_PROMPT_TEMPLATE, RESPONSE_LANGUAGE);
     
     public String build(AiRequest request) {
         try {
@@ -37,7 +56,9 @@ public class PromptBuilder {
                           .append("\n");
             });
             
-            metricsText.append("\nProvide analysis in JSON format with fields: summary, explanation, recommendation.");
+            metricsText.append("\nRespond with ONLY a JSON object. ")
+                .append("Values for summary, explanation, and recommendation ")
+                .append("must be plain text strings, not objects or arrays.");
             
             return metricsText.toString();
             

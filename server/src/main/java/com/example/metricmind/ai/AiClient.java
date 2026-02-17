@@ -21,6 +21,33 @@ public class AiClient {
     private final WebClient aiWebClient;
     private final ObjectMapper mapper;
     private final PromptBuilder promptBuilder;
+
+    public void ping() {
+        log.debug("Pinging AI service to warm up model...");
+        
+        Map<String, Object> requestBody = Map.of(
+            "model", properties.getModel(),
+            "messages", List.of(
+                Map.of("role", "user", "content", "Hi")
+            ),
+            "stream", false,
+            "options", Map.of(
+                "temperature", 0.1,
+                "num_predict", 5
+            )
+        );
+        
+        aiWebClient
+            .post()
+            .uri("/api/chat")
+            .bodyValue(requestBody)
+            .retrieve()
+            .bodyToMono(OllamaChatResponse.class)
+            .timeout(Duration.ofSeconds(properties.getTimeoutSeconds()))
+            .block();
+        
+        log.debug("AI ping completed");
+    }
     
     public AiResponse generate(String userPrompt) {
         log.debug("Sending request to AI service: {}", properties.getBaseUrl());
