@@ -1,88 +1,74 @@
-/* ===============================
-   DESIGN TOKENS
-   =============================== */
-
 :root {
-  /* Colors — light */
   --bg: #f5f7fb;
-  --card: #ffffff;
+  --bg-card: #ffffff;
   --text: #111827;
   --text-muted: #6b7280;
   --border: #e5e7eb;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
 
-  /* Accent */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-
-  /* Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
 
-  /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
 
-  /* Typography */
-  --font-base: 15px;
   --font-sm: 13px;
+  --font-base: 15px;
   --font-lg: 18px;
-}
 
-/* ===============================
-     DARK THEME
-     =============================== */
+  --shadow-card: 0 6px 16px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
 
 [data-theme="dark"] {
   --bg: #0f172a;
-  --card: #020617;
+  --bg-card: #020617;
   --text: #f8fafc;
   --text-muted: #94a3b8;
   --border: #1e293b;
+  --accent: #4f8cff;
+  --accent-hover: #6fa8ff;
 }
 
-/* ===============================
-     RESET & BASE
-     =============================== */
-
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: var(--font-base);
   line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
 }
 
-/* ===============================
-     TYPOGRAPHY
-     =============================== */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   margin: 0 0 var(--space-md) 0;
   font-weight: 600;
 }
@@ -92,32 +78,24 @@ p {
   color: var(--text-muted);
 }
 
-/* ===============================
-     BUTTONS
-     =============================== */
-
 button {
   font-family: inherit;
-  font-size: var(--font-sm);
-  padding: 8px 16px;
+  font-size: var(--font-md);
+  padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
+  background: var(--accent);
+  color: #ffffff;
   cursor: pointer;
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.1s ease,
-    box-shadow 0.1s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 button:hover {
-  background: var(--primary);
+  background: var(--accent-hover);
   color: #ffffff;
-  border-color: var(--primary);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+  border-color: var(--accent-hover);
+  box-shadow: var(--shadow-hover);
+  transition: all 0.2s ease;
 }
 
 button:active {
@@ -130,92 +108,30 @@ button:disabled {
   box-shadow: none;
 }
 
-/* 
-     UTILITIES
-     */
-
 .container {
-  max-width: 1600px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  width: 100%;
+  padding: 0 var(--space-md);
 }
 
-/* ===============================
-   LOGIN PAGE 
-   =============================== */
-
-.login-page {
-  min-height: 100vh;
-  background: var(--bg);
+.hover-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-/* absolute centering that ignores body transforms */
-.login-card {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 100%;
-  max-width: 380px;
-  padding: var(--space-xl);
-
-  background: var(--card);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+.hover-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
 }
 
-/* floating theme toggle */
-.login-theme {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 10;
-}
-
-/* adaptive text */
-.login-card h1 {
-  font-size: clamp(22px, 5vw, 32px);
-  line-height: 1.2;
-  word-break: break-word;
-}
-
-.login-card p {
-  font-size: clamp(13px, 3.5vw, 15px);
-}
-
-/* ===============================
-   LOGIN THEME TOGGLE
-   =============================== */
-
-.login-theme {
-  position: absolute;
-  top: var(--space-lg);
-  right: var(--space-lg);
-}
-
-/* ===============================
-   RESPONSIVE TEXT FIX
-   =============================== */
-
-.login-card {
-  max-width: 360px;
-  width: 100%;
-}
-
-.login-card h1 {
-  font-size: clamp(22px, 5vw, 32px);
-  line-height: 1.2;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
-.login-card p {
-  font-size: clamp(13px, 3.5vw, 15px);
-  max-width: 100%;
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
 }

@@ -1,18 +1,16 @@
-import { apiRequest } from "./client";
+import { apiRequest } from "../utils/ApiClient";
 
-export function loginWithGoogle(token) {
-  return apiRequest("/auth/google", {
+export function login(idToken) {
+  return apiRequest("/api/auth/login", {
     method: "POST",
-    body: JSON.stringify({ token })
+    body: JSON.stringify({ idToken })
   });
 }
 
-export function getMe() {
-  return apiRequest("/auth/me");
+export function getCurrentUser() {
+  return apiRequest("/api/auth/me");
 }
 
-export function logout() {
-  return apiRequest("/auth/logout", {
-    method: "POST"
-  });
+export async function logout() {
+  return await apiRequest("/api/auth/logout", { method: "POST" });
 }

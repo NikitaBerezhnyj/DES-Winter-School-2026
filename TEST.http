@@ -1,8 +1,8 @@
 @backend_url = http://localhost:8080
 @ai_url = http://localhost:11434
 
-@idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImMyN2JhNDBiMDk1MjlhZDRmMTY4MjJjZTgzMTY3YzFiYzM5MTAxMjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI4MzI0NzA3MjA1MzMwNzAyOTMiLCJlbWFpbCI6IndpbnRlcmZka2dqMzU1MkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzcwOTExMjg0LCJuYW1lIjoiV2ludGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tSamttMnNJUHpndTBTT0dYVGNsSWFsemR2eEZQS0pVVUhWbVFlWURqd3F5cTlUdz1zOTYtYyIsImdpdmVuX25hbWUiOiJXaW50ZXIiLCJpYXQiOjE3NzA5MTE1ODQsImV4cCI6MTc3MDkxNTE4NCwianRpIjoiNjA5NTkwMmQ0ZDAyYmVkMzNiMzlmZTgwMTY3ZDY5ZWU5YjFlZGM0ZiJ9.YxCIEW3ckfbGZg9RjINEtnui4UE5chX7Y4OJzK8de1u3Ls_08IiyYAZXe_YJevvJVJW1qYIGMcpSZQmifWh3WRovKF8v9TYygmqucGYpSmGg0M3ldu9mgERgidFNq0UGAtoq4Ky8SGuZ9i3lnSANfqPjbf828kHDXLPEKO2indWmElR8Ed3XAWClSIaCcgkJRT7erhAXDmZcsYeKIu6I71JbWlHyfP34Koj-6HoT10GtaTnwo1sZVOTMGLxoUQB96f8-DFSp4-KzgHr6Ei5GtXgUTIp1mpB6ZtGWFkSt0sXst-DCgdlztEkZ-Qc_rfsay9bB51S0TSbwA-w2JDQijg"
-@sessionToken = "FVQ0AdmoSbfgHGCn6SDNgN5JJYQ2UlPnfXRKjMzh1xc"
+@idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM4MTZkMzM3YjgzNjVhMDZhODUxYWQ4MDAxNmMxNzEwOTk0OTI2MDkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIzNjkzODk0NDQwNzctdnFpYmRicnVkdHZmM29zdGNmdDViczI3dG5yMWhsaGsuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTI4MzI0NzA3MjA1MzMwNzAyOTMiLCJlbWFpbCI6IndpbnRlcmZka2dqMzU1MkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzcxMzIyMzExLCJuYW1lIjoiV2ludGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tSamttMnNJUHpndTBTT0dYVGNsSWFsemR2eEZQS0pVVUhWbVFlWURqd3F5cTlUdz1zOTYtYyIsImdpdmVuX25hbWUiOiJXaW50ZXIiLCJpYXQiOjE3NzEzMjI2MTEsImV4cCI6MTc3MTMyNjIxMSwianRpIjoiZDJiNDljOTBhNWIxNGQ5ZGE5YzQwNDBkZmZhM2Q3N2M3NTk0Y2FlNSJ9.XDgzM8BwC_8uiqunUN0BD07csCAScDvmNb7djidn3tv2HtAnhetaDNp3sjE_4nb8d0Ct4UaWIMHuPDP-hbWlCejIz-M2eHCu9ZtkW3lOabu6euAYeNgX_CxZZW2RoUsHSWfRb16mlJhmVUU9sI2IQiB56png-k8Utu5mCOMLQ4PFEstNFYziNPQQIrcWyIlS1L49TYz0RlHeAvj5XAvXHMdJS6SuCcwLVYLYy7OeNn_9o57adzU253JZr2k3T3zXthY3JUnNV6c7zSyB_wsluZUz4lFv8GASqBIPH9CB45azTJag7cxZqmlv27C7U4cRFlAKEniH587jeYxu1gIgpw"
+@sessionToken = "ipqp22jGcM5rWnHrDVNIqgS2MxKURN01TDm8copY9T8"
 
 ### ================================
 ### BACKEND API
@@ -38,6 +38,28 @@ Cookie: SESSION_TOKEN={{sessionToken}}
 ### GET Dashboard report for 30 days
 GET {{backend_url}}/api/dashboard?period=30
 Cookie: SESSION_TOKEN={{sessionToken}}
+
+### GET Отримати OAuth URL
+GET {{backend_url}}/api/analytics/oauth2/authorize-url
+
+### GET Після OAuth - отримати список properties
+GET {{backend_url}}/api/analytics/properties
+Cookie: SESSION_TOKEN={{sessionToken}}
+
+### POST Вибрати property
+POST {{backend_url}}/api/analytics/properties/123456789/select
+Cookie: SESSION_TOKEN={{sessionToken}}
+
+### POST Отримати метрики
+POST {{backend_url}}/api/analytics/metrics
+Cookie: SESSION_TOKEN={{sessionToken}}
+Content-Type: application/json
+
+{
+  "propertyId": "123456789",
+  "startDate": "7daysAgo",
+  "endDate": "today"
+}
 
 ### ================================
 ### AI API
