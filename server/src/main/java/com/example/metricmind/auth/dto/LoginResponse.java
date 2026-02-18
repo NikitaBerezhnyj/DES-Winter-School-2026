@@ -1,8 +1,9 @@
-package com.example.metricmind.dto.auth;
+package com.example.metricmind.auth.dto;
 
 import lombok.*;
-import java.time.LocalDateTime;
+
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Data
 @Builder

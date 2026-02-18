@@ -1,7 +1,8 @@
-package com.example.metricmind.dto.auth;
+package com.example.metricmind.auth.dto;
+
+import lombok.Data;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 
 @Data
 public class LoginRequest {

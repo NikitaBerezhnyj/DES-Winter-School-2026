@@ -1,4 +1,4 @@
-package com.example.metricmind.analytics;
+package com.example.metricmind.analytics.services;
 
 import com.example.metricmind.analytics.dto.Ga4PropertyDto;
 import com.example.metricmind.exception.ApiException;
@@ -24,7 +24,7 @@ public class Ga4AdminService {
     private final ObjectMapper objectMapper;
 
     private static final String ADMIN_API_BASE = "https://analyticsadmin.googleapis.com/v1beta";
-    
+
     public List<Ga4PropertyDto> listProperties(User user) {
         String accessToken = tokenService.getValidAccessToken(user);
         log.info("Fetching GA4 properties for user: {}", user.getEmail());
@@ -45,7 +45,7 @@ public class Ga4AdminService {
                 log.warn("No GA4 accounts found for user: {}", user.getEmail());
                 return allProperties;
             }
-            
+
             for (JsonNode account : accountsNode.get("accounts")) {
                 String accountName = account.get("name").asText();
 
@@ -91,7 +91,7 @@ public class Ga4AdminService {
             throw ApiException.badRequest("Failed to fetch GA4 properties: " + e.getMessage());
         }
     }
-    
+
     public Ga4PropertyDto getProperty(User user, String propertyId) {
         String accessToken = tokenService.getValidAccessToken(user);
         log.info("Fetching GA4 property {} for user: {}", propertyId, user.getEmail());

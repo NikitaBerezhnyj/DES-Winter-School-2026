@@ -1,4 +1,4 @@
-package com.example.metricmind.analytics;
+package com.example.metricmind.analytics.services;
 
 import com.example.metricmind.analytics.dto.Ga4MetricsResponse;
 import com.example.metricmind.exception.ApiException;
@@ -61,54 +61,59 @@ public class Ga4DataService {
 
     private Map<String, Object> buildMetricsRequest(String startDate, String endDate) {
         Map<String, Object> request = new HashMap<>();
-        
+
         Map<String, String> dateRange = new HashMap<>();
         dateRange.put("startDate", startDate);
         dateRange.put("endDate", endDate);
-        request.put("dateRanges", new Object[]{dateRange});
-       
-        request.put("metrics", new Object[]{
+        request.put("dateRanges", new Object[] { dateRange });
+
+        request.put("metrics", new Object[] {
                 Map.of("name", "activeUsers"),
                 Map.of("name", "sessions"),
                 Map.of("name", "eventCount"),
                 Map.of("name", "conversions"),
                 Map.of("name", "userEngagementDuration")
         });
-        
-        request.put("dimensions", new Object[]{
+
+        request.put("dimensions", new Object[] {
                 Map.of("name", "sessionDefaultChannelGroup")
         });
-        
-        request.put("metricAggregations", new Object[]{"TOTAL"});
+
+        request.put("metricAggregations", new Object[] { "TOTAL" });
 
         return request;
     }
 
     private Ga4MetricsResponse parseMetricsResponse(String propertyId, String startDate,
-                                                     String endDate, JsonNode responseNode) {
+            String endDate, JsonNode responseNode) {
         Map<String, Object> metrics = new HashMap<>();
         Map<String, Object> dimensions = new HashMap<>();
-       
+
         if (responseNode.has("totals") && responseNode.get("totals").size() > 0) {
             JsonNode totals = responseNode.get("totals").get(0);
             JsonNode metricValues = totals.get("metricValues");
 
             if (metricValues != null) {
-                if (metricValues.size() > 0) metrics.put("users",
-                        safeInt(metricValues.get(0)));
-                if (metricValues.size() > 1) metrics.put("sessions",
-                        safeInt(metricValues.get(1)));
-                if (metricValues.size() > 2) metrics.put("eventCount",
-                        safeInt(metricValues.get(2)));
-                if (metricValues.size() > 3) metrics.put("conversions",
-                        safeInt(metricValues.get(3)));
-                if (metricValues.size() > 4) metrics.put("engagementTime",
-                        safeDouble(metricValues.get(4)));
+                if (metricValues.size() > 0)
+                    metrics.put("users",
+                            safeInt(metricValues.get(0)));
+                if (metricValues.size() > 1)
+                    metrics.put("sessions",
+                            safeInt(metricValues.get(1)));
+                if (metricValues.size() > 2)
+                    metrics.put("eventCount",
+                            safeInt(metricValues.get(2)));
+                if (metricValues.size() > 3)
+                    metrics.put("conversions",
+                            safeInt(metricValues.get(3)));
+                if (metricValues.size() > 4)
+                    metrics.put("engagementTime",
+                            safeDouble(metricValues.get(4)));
             }
         } else {
             log.warn("No totals in GA4 response for property: {}", propertyId);
         }
-        
+
         if (responseNode.has("rows")) {
             Map<String, Integer> trafficSource = new HashMap<>();
 
@@ -136,12 +141,14 @@ public class Ga4DataService {
     }
 
     private int safeInt(JsonNode node) {
-        if (node == null) return 0;
+        if (node == null)
+            return 0;
         return node.path("value").asInt(0);
     }
 
     private double safeDouble(JsonNode node) {
-        if (node == null) return 0.0;
+        if (node == null)
+            return 0.0;
         return node.path("value").asDouble(0.0);
     }
 }

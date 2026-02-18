@@ -1,23 +1,25 @@
-package com.example.metricmind.analytics;
+package com.example.metricmind.analytics.controllers;
 
-import com.example.metricmind.analytics.dto.Ga4AuthRequest;
-import com.example.metricmind.analytics.dto.Ga4AuthResponse;
+import com.example.metricmind.user.User;
+import com.example.metricmind.auth.AuthService;
+import com.example.metricmind.utils.CookieUtils;
+import com.example.metricmind.common.AppProperties;
+import com.example.metricmind.analytics.dto.Ga4PropertyDto;
 import com.example.metricmind.analytics.dto.Ga4MetricsRequest;
 import com.example.metricmind.analytics.dto.Ga4MetricsResponse;
-import com.example.metricmind.analytics.dto.Ga4PropertyDto;
-import com.example.metricmind.auth.AuthService;
-import com.example.metricmind.user.User;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import com.example.metricmind.analytics.services.AnalyticsService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.beans.factory.annotation.Value;
 
-import java.util.Arrays;
+import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+
+import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 @Slf4j
@@ -26,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnalyticsController {
 
+    private final AppProperties appProperties;
     private final AnalyticsService analyticsService;
     private final AuthService authService;
 
@@ -35,19 +38,13 @@ public class AnalyticsController {
     @Value("${google.client-id}")
     private String clientId;
 
-    @Value("${app.frontend-url:http://localhost:5173}")
-    private String frontendUrl;
-
-    @Value("${app.backend-url:http://localhost:8080}")
-    private String backendUrl;
-
     @GetMapping("/oauth2/authorize-url")
     public ResponseEntity<AuthorizeUrlResponse> getAuthorizeUrl(HttpServletRequest request) {
         String sessionToken = getSessionTokenFromCookie(request);
         if (sessionToken == null) {
             return ResponseEntity.status(401).build();
         }
-        
+
         String loginHint = null;
         try {
             User user = authService.getUserBySession(sessionToken);
@@ -56,7 +53,7 @@ public class AnalyticsController {
             log.warn("Could not get user email for login hint: {}", e.getMessage());
         }
 
-        String redirectUri = backendUrl + "/api/analytics/oauth2/callback";
+        String redirectUri = appProperties.getBackendUrl() + "/api/analytics/oauth2/callback";
 
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString("https://accounts.google.com/o/oauth2/v2/auth")
@@ -78,21 +75,20 @@ public class AnalyticsController {
 
         return ResponseEntity.ok(new AuthorizeUrlResponse(authUrl));
     }
-    
+
     @GetMapping("/oauth2/callback")
     public ResponseEntity<Void> handleOAuth2Callback(
             @RequestParam String code,
             @RequestParam(required = false) String state,
             @RequestParam(required = false) String error,
-            HttpServletRequest request
-    ) {
+            HttpServletRequest request) {
         if (error != null) {
             log.warn("GA4 OAuth error: {}", error);
             return ResponseEntity.status(302)
-                    .header("Location", frontendUrl + "/dashboard?ga4=error&reason=" + error)
+                    .header("Location", appProperties.getFrontendUrl() + "/dashboard?ga4=error&reason=" + error)
                     .build();
         }
-        
+
         String sessionToken = (state != null && !state.isBlank())
                 ? state
                 : getSessionTokenFromCookie(request);
@@ -100,7 +96,7 @@ public class AnalyticsController {
         if (sessionToken == null) {
             log.error("No session token in state or cookie during GA4 callback");
             return ResponseEntity.status(302)
-                    .header("Location", frontendUrl + "/login?error=session_expired")
+                    .header("Location", appProperties.getFrontendUrl() + "/login?error=session_expired")
                     .build();
         }
 
@@ -109,19 +105,20 @@ public class AnalyticsController {
             log.info("Processing GA4 callback for user: {}", user.getEmail());
 
             analyticsService.connectGa4Account(user, code);
-            
+
             return ResponseEntity.status(302)
-                    .header("Location", frontendUrl + "/dashboard?ga4=success")
+                    .header("Location", appProperties.getFrontendUrl() + "/dashboard?ga4=success")
                     .build();
 
         } catch (Exception e) {
             log.error("Failed to connect GA4 for session {}: {}", sessionToken, e.getMessage());
             return ResponseEntity.status(302)
-                    .header("Location", frontendUrl + "/dashboard?ga4=error&reason=token_exchange_failed")
+                    .header("Location",
+                            appProperties.getFrontendUrl() + "/dashboard?ga4=error&reason=token_exchange_failed")
                     .build();
         }
     }
-    
+
     @GetMapping("/properties")
     public ResponseEntity<List<Ga4PropertyDto>> getProperties(HttpServletRequest request) {
         User user = getUserFromRequest(request);
@@ -132,8 +129,7 @@ public class AnalyticsController {
     @GetMapping("/properties/{propertyId}")
     public ResponseEntity<Ga4PropertyDto> getProperty(
             @PathVariable String propertyId,
-            HttpServletRequest request
-    ) {
+            HttpServletRequest request) {
         User user = getUserFromRequest(request);
         Ga4PropertyDto property = analyticsService.getProperty(user, propertyId);
         return ResponseEntity.ok(property);
@@ -142,26 +138,23 @@ public class AnalyticsController {
     @PostMapping("/properties/{propertyId}/select")
     public ResponseEntity<Void> selectProperty(
             @PathVariable String propertyId,
-            HttpServletRequest request
-    ) {
+            HttpServletRequest request) {
         User user = getUserFromRequest(request);
         analyticsService.selectProperty(user, propertyId);
         log.info("User {} selected property: {}", user.getEmail(), propertyId);
         return ResponseEntity.ok().build();
     }
-    
+
     @PostMapping("/metrics")
     public ResponseEntity<Ga4MetricsResponse> getMetrics(
             @Valid @RequestBody Ga4MetricsRequest metricsRequest,
-            HttpServletRequest httpRequest
-    ) {
-        User user = getUserFromRequest(httpRequest);
+            HttpServletRequest request) {
+        User user = getUserFromRequest(request);
         Ga4MetricsResponse metrics = analyticsService.getMetrics(
                 user,
                 metricsRequest.getPropertyId(),
                 metricsRequest.getStartDate(),
-                metricsRequest.getEndDate()
-        );
+                metricsRequest.getEndDate());
         return ResponseEntity.ok(metrics);
     }
 
@@ -174,14 +167,9 @@ public class AnalyticsController {
     }
 
     private String getSessionTokenFromCookie(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) return null;
-        return Arrays.stream(cookies)
-                .filter(cookie -> sessionCookieName.equals(cookie.getName()))
-                .map(Cookie::getValue)
-                .findFirst()
-                .orElse(null);
+        return CookieUtils.getCookieValue(request, sessionCookieName);
     }
 
-    public record AuthorizeUrlResponse(String url) {}
+    public record AuthorizeUrlResponse(String url) {
+    }
 }

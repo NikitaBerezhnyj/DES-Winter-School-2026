@@ -7,7 +7,7 @@ import lombok.Data;
 public class Ga4MetricsRequest {
     @NotBlank(message = "Property ID is required")
     private String propertyId;
-    
+
     private String startDate = "7daysAgo";
     private String endDate = "today";
 }

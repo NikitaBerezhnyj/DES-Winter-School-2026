@@ -1,10 +1,10 @@
 package com.example.metricmind.user;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -28,7 +28,7 @@ public class User {
 
     @Column(name = "picture_url")
     private String pictureUrl;
-    
+
     private String ga4AccessToken;
     private String ga4RefreshToken;
     private LocalDateTime ga4TokenExpiresAt;

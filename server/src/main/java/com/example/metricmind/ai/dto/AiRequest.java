@@ -1,4 +1,4 @@
-package com.example.metricmind.dto.ai;
+package com.example.metricmind.ai.dto;
 
 import lombok.Builder;
 import lombok.Data;

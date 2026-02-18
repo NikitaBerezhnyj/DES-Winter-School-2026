@@ -1,9 +1,9 @@
-package com.example.metricmind.dto.auth;
+package com.example.metricmind.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CurrentUserResponse {
-    
+
     private UUID id;
     private String email;
     private String name;

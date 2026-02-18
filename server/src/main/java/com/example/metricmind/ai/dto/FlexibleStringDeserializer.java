@@ -1,4 +1,4 @@
-package com.example.metricmind.dto.ai;
+package com.example.metricmind.ai.dto;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -19,13 +19,13 @@ public class FlexibleStringDeserializer extends StdDeserializer<String> {
         if (p.currentToken() == JsonToken.VALUE_STRING) {
             return p.getText();
         }
-        
+
         JsonNode node = p.getCodec().readTree(p);
 
         if (node.isTextual()) {
             return node.asText();
         }
-        
+
         return flattenNode(node);
     }
 
@@ -39,7 +39,8 @@ public class FlexibleStringDeserializer extends StdDeserializer<String> {
             node.forEach(child -> {
                 String text = flattenNode(child);
                 if (!text.isBlank()) {
-                    if (!sb.isEmpty()) sb.append(" ");
+                    if (!sb.isEmpty())
+                        sb.append(" ");
                     sb.append(text);
                 }
             });
@@ -51,7 +52,8 @@ public class FlexibleStringDeserializer extends StdDeserializer<String> {
             node.fields().forEachRemaining(entry -> {
                 String value = flattenNode(entry.getValue());
                 if (!value.isBlank()) {
-                    if (!sb.isEmpty()) sb.append(" ");
+                    if (!sb.isEmpty())
+                        sb.append(" ");
                     sb.append(value);
                 }
             });
