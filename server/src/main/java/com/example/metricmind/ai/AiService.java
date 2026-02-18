@@ -1,9 +1,10 @@
 package com.example.metricmind.ai;
 
-import com.example.metricmind.dto.ai.AiRequest;
-import com.example.metricmind.dto.ai.AiResponse;
-import lombok.RequiredArgsConstructor;
+import com.example.metricmind.ai.dto.AiRequest;
+import com.example.metricmind.ai.dto.AiResponse;
+
 import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package com.example.metricmind.dto.ai;
+package com.example.metricmind.ai.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -1,7 +1,7 @@
-package com.example.metricmind.dto.analytics;
+package com.example.metricmind.dashboard.dto;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 @Builder
 public class DashboardDto {
     private Metrics metrics;
-    
+
     private AiReport aiReport;
 
     @Data
